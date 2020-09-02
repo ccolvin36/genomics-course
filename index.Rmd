@@ -3,6 +3,7 @@ title: "Index"
 author: "Chris Colvin"
 date: "8/31/2020"
 output: html_document
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -11,5 +12,4 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Labs
 
-"Lab 1" [git, GitHub and Rstudio project](Lab1_chriscolvin.html)
-
+[Lab 1, git, GitHub and Rstudio project](Lab1_chriscolvin.html)
