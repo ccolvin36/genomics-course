@@ -35,10 +35,10 @@ View(surveys)
 str(surveys)
 ```
 
-#Challenge 1
+# Challenge 1
 "Class is data frame, there are 34786 rows and 13 columns and there are 48 species"
 
-#Challenge 2
+# Challenge 2
 ```{r}
 surveys_200 <- surveys[200, ]
 ```
@@ -95,7 +95,7 @@ levels(sex)
 head(sex)
 ```
 
-#Challegne 3
+# Challegne 3
 ```{r}
 levels(sex)[2:3] <- c("female", "male")
 sex <- factor(sex, levels = c("female", "male", "undetermined"))
@@ -112,7 +112,7 @@ str(surveys)
 surveys$plot_type <- factor(surveys$plot_type)
 ```
 
-#Challenge 4
+# Challenge 4
 ```{r}
 animal_data <- data.frame(
           animal = c("dog", "cat", "sea cucumber", "sea urchin"),

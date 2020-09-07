@@ -412,8 +412,12 @@ summary {
 ##  $ species        : Factor w/ 40 levels &quot;albigula&quot;,&quot;audubonii&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ taxa           : Factor w/ 4 levels &quot;Bird&quot;,&quot;Rabbit&quot;,..: 4 4 4 4 4 4 4 4 4 4 ...
 ##  $ plot_type      : Factor w/ 5 levels &quot;Control&quot;,&quot;Long-term Krat Exclosure&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-<p>#Challenge 1 “Class is data frame, there are 34786 rows and 13 columns and there are 48 species”</p>
-<p>#Challenge 2</p>
+<div id="challenge-1" class="section level1">
+<h1>Challenge 1</h1>
+<p>“Class is data frame, there are 34786 rows and 13 columns and there are 48 species”</p>
+</div>
+<div id="challenge-2" class="section level1">
+<h1>Challenge 2</h1>
 <pre class="r"><code>surveys_200 &lt;- surveys[200, ]</code></pre>
 <pre class="r"><code>n_rows &lt;- nrow(surveys)
 surveys_last &lt;- surveys[n_rows, ]</code></pre>
@@ -445,7 +449,9 @@ levels(sex)</code></pre>
 <pre><code>## [1] M            M            undetermined undetermined undetermined
 ## [6] undetermined
 ## Levels: undetermined F M</code></pre>
-<p>#Challegne 3</p>
+</div>
+<div id="challegne-3" class="section level1">
+<h1>Challegne 3</h1>
 <pre class="r"><code>levels(sex)[2:3] &lt;- c(&quot;female&quot;, &quot;male&quot;)
 sex &lt;- factor(sex, levels = c(&quot;female&quot;, &quot;male&quot;, &quot;undetermined&quot;))
 plot(sex)</code></pre>
@@ -485,7 +491,9 @@ str(surveys)</code></pre>
 ##  $ plot_type      : chr  &quot;Control&quot; &quot;Control&quot; &quot;Control&quot; &quot;Control&quot; ...</code></pre>
 <pre class="r"><code>## Convert the column &quot;plot_type&quot; into a factor
 surveys$plot_type &lt;- factor(surveys$plot_type)</code></pre>
-<p>#Challenge 4</p>
+</div>
+<div id="challenge-4" class="section level1">
+<h1>Challenge 4</h1>
 <pre class="r"><code>animal_data &lt;- data.frame(
           animal = c(&quot;dog&quot;, &quot;cat&quot;, &quot;sea cucumber&quot;, &quot;sea urchin&quot;),
           feel = c(&quot;furry&quot;, &quot;hairy&quot;, &quot;squishy&quot;, &quot;spiny&quot;),
@@ -14481,6 +14489,7 @@ head(missing_dates)</code></pre>
 ## 3819 2000     4  31
 ## 3820 2000     4  31
 ## 3856 2000     9  31</code></pre>
+</div>
 <div id="references" class="section level1">
 <h1>References</h1>
 <p><span class="citation">(R Core Team 2015)</span> <span class="citation">(Chang et al. 2015)</span></p>
