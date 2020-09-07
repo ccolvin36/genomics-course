@@ -1,5 +1,5 @@
 ---
-title: "Index"
+title: "index"
 author: "Chris Colvin"
 date: "8/31/2020"
 output: html_document
@@ -13,3 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Labs
 
 [Lab 1, git, GitHub and Rstudio project](Lab1_chriscolvin.html)
+
+[Lab 2, git, GitHub and Rstudio project](Lab2_chriscolvin.html)
+
+# REFERENCES
