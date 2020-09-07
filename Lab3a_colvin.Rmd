@@ -1,0 +1,177 @@
+---
+title: "Lab3a_colvin"
+author: "Chris Colvin"
+date: "9/7/2020"
+output: html_document
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r,eval=FALSE}
+download.file(url = "https://ndownloader.figshare.com/files/2292169",
+              destfile = "data_raw/portal_data_joined.csv")
+```
+
+```{r}
+surveys <- read.csv("data_raw/portal_data_joined.csv")
+```
+
+```{r}
+head(surveys)
+```
+
+```{r}
+View(surveys)
+```
+
+```{r}
+str(surveys)
+```
+
+#Challenge 1
+"Class is data frame, there are 34786 rows and 13 columns and there are 48 species"
+
+#Challenge 2
+```{r}
+surveys_200 <- surveys[200, ]
+```
+
+```{r}
+n_rows <- nrow(surveys)
+surveys_last <- surveys[n_rows, ]
+```
+
+```{r}
+surveys_middle <- surveys[n_rows / 2, ]
+```
+
+```{r}
+surveys_head <- surveys[-(7:n_rows), ]
+```
+
+```{r}
+sex <- factor(c("male", "female", "female", "male"))
+```
+
+```{r}
+levels(sex)
+nlevels(sex)
+```
+```{r}
+as.character(sex)
+```
+
+```{r}
+year_fct <- factor(c(1990, 1983, 1977, 1998, 1990))
+as.numeric(levels(year_fct))[year_fct]
+```
+```{r}
+## bar plot of the number of females and males captured during the experiment:
+plot(as.factor(surveys$sex))
+```
+
+```{r}
+sex <- factor(surveys$sex)
+head(sex)
+```
+
+```{r}
+levels(sex)
+```
+
+```{r}
+levels(sex)[1] <- "undetermined"
+levels(sex)
+```
+
+```{r}
+head(sex)
+```
+
+#Challegne 3
+```{r}
+levels(sex)[2:3] <- c("female", "male")
+sex <- factor(sex, levels = c("female", "male", "undetermined"))
+plot(sex)
+```
+
+```{r}
+## Compare the difference between our data read as `factor` vs `character`.
+surveys <- read.csv("data_raw/portal_data_joined.csv", stringsAsFactors = TRUE)
+str(surveys)
+surveys <- read.csv("data_raw/portal_data_joined.csv", stringsAsFactors = FALSE)
+str(surveys)
+## Convert the column "plot_type" into a factor
+surveys$plot_type <- factor(surveys$plot_type)
+```
+
+#Challenge 4
+```{r}
+animal_data <- data.frame(
+          animal = c("dog", "cat", "sea cucumber", "sea urchin"),
+          feel = c("furry", "hairy", "squishy", "spiny"),
+          weight = c(45, 8, 1.1, 0.8)
+          )
+
+country_climate <- data.frame(
+       country = c("Canada", "Panama", "South Africa", "Australia"),
+       climate = c("cold", "hot", "temperate", "hot/temperate"),
+       temperature = c(10, 30, 18, 15),
+       northern_hemisphere = c(TRUE, TRUE, FALSE, FALSE),
+       kangaroo = c(FALSE, FALSE, FALSE, TRUE)
+       )
+```
+
+```{r}
+str(surveys)
+```
+
+```{r}
+library("lubridate")
+```
+
+```{r}
+my_date <- ymd("2015-01-01")
+str(my_date)
+```
+```{r}
+my_date <- ymd(paste("2015", "1", "1", sep = "-")) 
+str(my_date)
+```
+
+```{r}
+paste(surveys$year, surveys$month, surveys$day, sep = "-")
+```
+
+```{r}
+ymd(paste(surveys$year, surveys$month, surveys$day, sep = "-"))
+```
+
+```{r}
+surveys$date <- ymd(paste(surveys$year, surveys$month, surveys$day, sep = "-"))
+```
+
+```{r}
+str(surveys)
+```
+
+```{r}
+summary(surveys$date)
+```
+
+```{r}
+missing_dates <- surveys[is.na(surveys$date), c("year", "month", "day")]
+
+head(missing_dates)
+```
+
+# References
+[@RCoreTeam]
+[@Chang2015]
