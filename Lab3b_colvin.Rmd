@@ -278,7 +278,7 @@ surveys_complete <- surveys_complete %>%
 ```
 
 ```{r}
-write_csv(surveys_complete, path = "data_raw/surveys_complete.csv")
+write_csv(surveys_complete, path = "data/surveys_complete.csv")
 ```
 
 # References
