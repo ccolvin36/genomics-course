@@ -43,25 +43,25 @@ ggplot(data = surveys_complete,
 
 ```{r}
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
-    geom_boxplot(alpha = 0) +
-    geom_jitter(alpha = 0.3, color = "tomato")
+    geom_boxplot(alpha = 0) 
+   
 ```
 
 # Challenge 2
 ```{r}
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
-    geom_violin(alpha = 0) +
-    geom_jitter(alpha = 0.3, color = "tomato")
+    geom_violin(alpha = 1) 
+    
 ```
 ```{r}
-ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
-    geom_boxplot(alpha = 0) +
-    geom_jitter(alpha = 0.3, color = "tomato")
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) + scale_y_log10() +
+    geom_violin(alpha = 1)
+   
 ```
 
 ```{r}
 ggplot(data = surveys_complete, mapping = aes(x = species_id, y = hindfoot_length)) +
-    geom_boxplot(alpha = 1) +
-    geom_jitter(alpha = 0.3, color = "tomato")
+    geom_boxplot(alpha = 1) 
+    
 ```
 
