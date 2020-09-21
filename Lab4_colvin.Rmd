@@ -1,0 +1,98 @@
+---
+title: "Lab 4"
+author: "Chris Colvin"
+date: "9/14/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+# Exercise 1
+```{r}
+report_03_11_2020 <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-11-2020.csv")) %>%
+  rename(Country_Region = "Country/Region", Province_State = "Province/State")
+```
+
+```{r}
+str(report_03_11_2020)
+```
+
+```{r}
+View(report_03_11_2020)
+```
+
+```{r}
+library(DT)
+datatable(report_03_11_2020)
+```
+
+```{r}
+report_03_13_2020 <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-13-2020.csv")) %>%
+  rename(Country_Region = "Country/Region", Province_State = "Province/State")
+```
+```{r}
+report_09_13_2020 <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/09-13-2020.csv"))
+```
+
+```{r}
+str(report_03_13_2020)
+
+str(report_09_13_2020)
+```
+
+```{r}
+datatable(report_03_13_2020)
+
+datatable(report_09_13_2020)
+```
+
+```{r}
+countryA<- report_03_13_2020 %>%
+  group_by(Country_Region)%>%
+   summarise(Deaths = sum(Deaths))
+```
+
+
+```{r}
+countryB <- report_09_13_2020 %>%
+  group_by(Country_Region)%>%
+  summarise(Deaths = sum(Deaths))
+```
+
+```{r}
+report_03_13_2020 %>%
+  filter(Country_Region == "US")
+```
+
+```{r}
+report_09_13_2020 %>%
+  filter(Country_Region == "US")
+```
+
+```{r}
+DeathA<- countryA %>%
+  arrange(desc(Deaths))%>%
+  slice(1:10)
+```
+
+```{r}
+DeathB<- countryB %>%
+  arrange(desc(Deaths))%>%
+  slice(1:10)
+```
+```{r}
+datatable(DeathA)
+```
+```{r}
+datatable(DeathB)
+```
+```{r}
+ggplot(data = countryA, mapping = aes(x = Deaths, y = Country_Region)) + geom_bar(stat = 'identity') 
+```
+
+

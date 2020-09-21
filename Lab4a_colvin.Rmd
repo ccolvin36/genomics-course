@@ -1,0 +1,67 @@
+---
+title: "Lab 4a"
+author: "Chris Colvin"
+date: "9/21/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library("tidyverse")
+```
+
+```{r}
+surveys_complete <- read_csv("data/surveys_complete.csv")
+```
+```{r}
+ggplot(data = surveys_complete)
+ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length))
+ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) +
+  geom_point()
+
+```
+
+```{r}
+ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) +
+    geom_point()
+ggplot(data = surveys_complete, aes(x = weight, y = hindfoot_length)) +
+    geom_point(alpha = 0.1)
+ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
+    geom_point(alpha = 0.1, color = "blue")
+ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) +
+    geom_point(alpha = 0.1, aes(color = species_id))
+```
+# Challenge 1
+```{r}
+ggplot(data = surveys_complete, 
+       mapping = aes(x = species_id, y = weight)) +
+   geom_point(aes(color = plot_type))
+```
+
+```{r}
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+    geom_boxplot(alpha = 0) +
+    geom_jitter(alpha = 0.3, color = "tomato")
+```
+
+# Challenge 2
+```{r}
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+    geom_violin(alpha = 0) +
+    geom_jitter(alpha = 0.3, color = "tomato")
+```
+```{r}
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+    geom_boxplot(alpha = 0) +
+    geom_jitter(alpha = 0.3, color = "tomato")
+```
+
+```{r}
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = hindfoot_length)) +
+    geom_boxplot(alpha = 1) +
+    geom_jitter(alpha = 0.3, color = "tomato")
+```
+
