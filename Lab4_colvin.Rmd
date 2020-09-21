@@ -92,10 +92,10 @@ datatable(DeathA)
 datatable(DeathB)
 ```
 ```{r}
-ggplot(data = countryA, mapping = aes(x = Deaths, y = Country_Region)) + geom_bar(stat = 'identity') 
+ggplot(data = DeathA, mapping = aes(x = Deaths, y = Country_Region)) + geom_bar(stat = 'identity' , color= "blue" , fill = "blue") 
 ```
 ```{r}
-ggplot(data = countryB, mapping = aes(x = Deaths, y = Country_Region)) + geom_bar(stat = 'identity') 
+ggplot(data = DeathB, mapping = aes(x = Deaths, y = Country_Region)) + geom_bar(stat = 'identity', color= "blue" , fill = "blue") 
 ```
 
 
