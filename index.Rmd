@@ -23,4 +23,10 @@ knitr::opts_chunk$set(echo = TRUE)
 [Lab 4, git, Githhub and Rstudio project](Lab4_colvin.html)
 
 [Lab 4a, git, Githhub and Rstudio project](Lab4a_colvin.html)
+
+[Data Visualization Tutorial, Github and Rstudio project]()
+
+[Lab 5, git, Github and Rstudio project](Lab5_colvin.html)
+
 # REFERENCES
+
