@@ -299,6 +299,16 @@ time_series_long_joined %>%
 ```
 
 #Challenge 9
+```{r}
+time_series_US_confirmed <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv")) 
+time_series_US_confirmed_long <- time_series_US_confirmed %>% group_by(Province_State) %>% select(-c(UID,iso2, iso3, code3, FIPS, Admin2, Lat, Long_,Country_Region, Combined_Key)) %>% pivot_longer(-c(Province_State)) %>% group_by(Province_State, name) %>% summarise(value = sum(value))
+```
+
+
+```{r,fig.width = 15, fig.height = 20}
+time_series_US_confirmed_long %>% group_by(Province_State) %>% ggplot(aes(x = name,  y = value, color = Province_State)) + 
+    geom_point() + facet_wrap(~Province_State, ncol = 5) + labs(x = "Date", y = "Confirmed", title = "Confirmed COVID-19 in US States and Territories") 
+```
 
 #Challenge 10
 ```{r,fig.width=10, fig.height=10}
