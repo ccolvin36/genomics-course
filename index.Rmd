@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 [Lab 4a, git, Githhub and Rstudio project](Lab4a_colvin.html)
 
-[Data Visualization Tutorial, Github and Rstudio project]()
+[Data Visualization Tutorial, Github and Rstudio project](DataVisualizationTutorial_colvin.html)
 
 [Lab 5, git, Github and Rstudio project](Lab5_colvin.html)
 

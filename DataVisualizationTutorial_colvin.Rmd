@@ -14,6 +14,11 @@ library(tidyverse)
 ```
 
 ```{r}
+surveys_complete <- read_csv("data/surveys_complete.csv")
+```
+```
+
+```{r}
 yearly_counts <- surveys_complete %>%
   count(year, genus)
 ggplot(data = yearly_counts, aes(x = year, y = n)) +
