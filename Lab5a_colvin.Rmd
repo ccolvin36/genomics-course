@@ -129,12 +129,48 @@ png("images/time_series_challenge_plot.png", width=3*ppi, height=3*ppi, res=ppi)
 data_time <- time_series_long_joined %>% 
     group_by(Country_Region,Date) %>% 
     summarise_at(c("Confirmed", "Deaths"), sum) %>% 
-    filter (Country_Region %in% c("China","Korea, South","Japan","Italy","US")) 
+    filter (Country_Region == "China") %>%
+ggplot(aes(x = Date,  y = Confirmed)) + 
+      geom_point() +
+      geom_line() +
+      ggtitle("Confirmed in China") +
+      geom_point ()
+```
+
+![Challenge png](images/time_series_challenge_plot.png) 
+
+
+
+
+# Challenge 2
+    ```{r}
+data_time <- time_series_long_joined %>% 
+    group_by(Country_Region,Date) %>% 
+    summarise_at(c("Confirmed", "Deaths"), sum) %>% 
+    filter (Country_Region %in% c("United Kingdom","France","Italy","Brazil", "India","Peru", "Spain", "Iran", "Mexico", "US")) 
 p <- ggplot(data_time, aes(x = Date,  y = Confirmed, color = Country_Region)) + 
       geom_point() +
       geom_line() +
-      ggtitle("Confirmed COVID-19 Cases") +
+      ggtitle("Highest Death Totals") +
       geom_point(aes(group = seq_along(Date))) +
       transition_reveal(Date) 
+# Some people needed to use this line instead
+# animate(p,renderer = gifski_renderer(), end_pause = 15)
+animate(p, end_pause = 15)
+```
+
+# Challenge 3
+```{r}
+data_time <- time_series_long_joined %>% 
+    group_by(Province_State,Date) %>% 
+    summarise_at(c("Confirmed", "Deaths"), sum) %>% 
+    filter (Province_State %in% c("Massachusetts","New York","Rhode Island","Vermont", "Conneticut","Maine", "New Hampshire")) 
+p <- ggplot(data_time, aes(x = Date,  y = Confirmed, color = Country_Region)) + 
+      geom_point() +
+      geom_line() +
+      ggtitle("Confirmed North East COVID-19 Cases") +
+      geom_point(aes(group = seq_along(Date))) +
+      transition_reveal(Date) 
+animate(p, end_pause = 15)
 ```
 
