@@ -3,6 +3,7 @@ title: "Lab 6"
 author: "Chris Colvin"
 date: "9/28/2020"
 output: html_document
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -295,4 +296,133 @@ ggplotly(
 ```
 
 
+#Challenge 5
 
+# The number of Covid Deaths has only increased as seen by the figures below
+```{r,echo=FALSE, message=FALSE, error=FALSE}
+daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-26-2020.csv")) %>% 
+  rename(Long = "Long_") %>% 
+  group_by(Country_Region) %>% 
+  summarize(Confirmed = sum(Confirmed), Deaths = sum(Deaths))
+world <- as_tibble(map_data("world"))
+setdiff(world$region, daily_report$Country_Region) 
+```
+```{r,echo=FALSE, message=FALSE, error=FALSE}
+world <- as_tibble(map_data("world")) %>% 
+ mutate(region = str_replace_all(region, c("USA" = "US", "Czech Republic" = "Czechia",  
+        "Ivory Coast" = "Cote d'Ivoire", "Democratic Republic of the Congo" = "Congo (Kinshasa)", 
+        "Republic of Congo" = "Congo (Brazzaville)")))
+country_join <- left_join(world, daily_report, by = c("region" = "Country_Region"))
+ggplotly(
+ggplot(data = world, mapping = aes(x = long, y = lat, text = region, group = group)) + 
+  coord_fixed(1.3) + 
+  geom_polygon(data = country_join, aes(fill = Deaths), color = "black") +
+  scale_fill_gradientn(colours = 
+                         wes_palette("Zissou1", 100, type = "continuous")) +
+  labs(title = "COVID-19 Deaths 3/26")
+)
+```
+
+```{r,echo=FALSE, message=FALSE, error=FALSE}
+daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/09-26-2020.csv")) %>% 
+  rename(Long = "Long_") %>% 
+  group_by(Country_Region) %>% 
+  summarize(Confirmed = sum(Confirmed), Deaths = sum(Deaths))
+world <- as_tibble(map_data("world"))
+setdiff(world$region, daily_report$Country_Region) 
+```
+
+```{r,echo=FALSE, message=FALSE, error=FALSE}
+world <- as_tibble(map_data("world")) %>% 
+ mutate(region = str_replace_all(region, c("USA" = "US", "Czech Republic" = "Czechia",  
+        "Ivory Coast" = "Cote d'Ivoire", "Democratic Republic of the Congo" = "Congo (Kinshasa)", 
+        "Republic of Congo" = "Congo (Brazzaville)")))
+country_join <- left_join(world, daily_report, by = c("region" = "Country_Region"))
+ggplotly(
+ggplot(data = world, mapping = aes(x = long, y = lat, text = region, group = group)) + 
+  coord_fixed(1.3) + 
+  geom_polygon(data = country_join, aes(fill = Deaths), color = "black") +
+  scale_fill_gradientn(colours = 
+                         wes_palette("Zissou1", 100, type = "continuous")) +
+  labs(title = "COVID-19 Deaths 9/26")
+)
+```
+
+# Although many countries appear to have COVID under control to a degree, the same cannot be said for the US. We will specifically look at the US compared to the former hot spot of Italy
+
+```{r,echo=FALSE, message=FALSE, error=FALSE}
+daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-26-2020.csv")) %>% 
+  rename(Long = "Long_") %>% 
+  filter(Country_Region == "US") %>% 
+  group_by(Province_State) %>% 
+  summarize(Confirmed = sum(Confirmed), Deaths = sum(Deaths)) %>% 
+  mutate(Province_State = tolower(Province_State))
+us <- map_data("state")
+state_join <- left_join(us, daily_report, by = c("region" = "Province_State"))
+ggplot(data = us, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) + 
+  geom_polygon(data = state_join, aes(fill = Confirmed), color = "black") +
+  scale_fill_gradientn(colours = 
+                         wes_palette("Zissou1", 100, type = "continuous"),
+                         trans = "log10") +
+  labs(title = "COVID-19 Confirmed Deaths in the US 3/26")
+```
+
+```{r,echo=FALSE, message=FALSE, error=FALSE}
+daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/09-26-2020.csv")) %>% 
+  rename(Long = "Long_") %>% 
+  filter(Country_Region == "US") %>% 
+  group_by(Province_State) %>% 
+  summarize(Confirmed = sum(Confirmed), Deaths = sum(Deaths)) %>% 
+  mutate(Province_State = tolower(Province_State))
+us <- map_data("state")
+state_join <- left_join(us, daily_report, by = c("region" = "Province_State"))
+ggplot(data = us, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) + 
+  geom_polygon(data = state_join, aes(fill = Confirmed), color = "black") +
+  scale_fill_gradientn(colours = 
+                         wes_palette("Zissou1", 100, type = "continuous"),
+                         trans = "log10") +
+  labs(title = "COVID-19 Confirmed Death in the US 9/26")
+```
+
+# As seen, there is a sharp increase of deaths in the US. now lets look at Canada 
+
+```{r,echo=FALSE, message=FALSE, error=FALSE}
+daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-26-2020.csv")) %>% 
+  rename(Long = "Long_") %>% 
+  filter(Country_Region == "Canada") %>% 
+  group_by(Province_State) %>% 
+  summarize(Confirmed = sum(Confirmed), Deaths = sum(Deaths)) %>% 
+  mutate(Province_State = tolower(Province_State))
+Canada <- map_data("world")
+state_join <- left_join(Canada, daily_report, by = c("region" = "Province_State"))
+ggplot(data = Canada, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) + 
+  geom_polygon(data = state_join, aes(fill = Confirmed), color = "black") +
+  scale_fill_gradientn(colours = 
+                         wes_palette("Zissou1", 100, type = "continuous"),
+                         trans = "log10") +
+  labs(title = "COVID-19 Confirmed Deaths in the Canada 3/26")
+```
+
+```{r,echo=FALSE, message=FALSE, error=FALSE}
+daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/09-26-2020.csv")) %>% 
+  rename(Long = "Long_") %>% 
+  filter(Country_Region == "Canada") %>% 
+  group_by(Province_State) %>% 
+  summarize(Confirmed = sum(Confirmed), Deaths = sum(Deaths)) %>% 
+  mutate(Province_State = tolower(Province_State))
+Canada <- map_data("world")
+state_join <- left_join(Canada, daily_report, by = c("region" = "Province_State"))
+ggplot(data = Canada, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) + 
+  geom_polygon(data = state_join, aes(fill = Confirmed), color = "black") +
+  scale_fill_gradientn(colours = 
+                         wes_palette("Zissou1", 100, type = "continuous"),
+                         trans = "log10") +
+  labs(title = "COVID-19 Confirmed Deaths in the Canada 9/26")
+```
+
+# References
+[@RCoreTeam]
