@@ -299,7 +299,7 @@ ggplotly(
 #Challenge 5
 
 # The number of Covid Deaths has only increased as seen by the figures below
-```{r,echo=FALSE, message=FALSE, error=FALSE}
+```{r,echo=FALSE, message=FALSE, error=FALSE, warning=FALSE}
 daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-26-2020.csv")) %>% 
   rename(Long = "Long_") %>% 
   group_by(Country_Region) %>% 
@@ -323,7 +323,7 @@ ggplot(data = world, mapping = aes(x = long, y = lat, text = region, group = gro
 )
 ```
 
-```{r,echo=FALSE, message=FALSE, error=FALSE}
+```{r,echo=FALSE, message=FALSE, error=FALSE,warning=FALSE}
 daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/09-26-2020.csv")) %>% 
   rename(Long = "Long_") %>% 
   group_by(Country_Region) %>% 
@@ -350,7 +350,7 @@ ggplot(data = world, mapping = aes(x = long, y = lat, text = region, group = gro
 
 # Although many countries appear to have COVID under control to a degree, the same cannot be said for the US. We will specifically look at the US compared to the former hot spot of Italy
 
-```{r,echo=FALSE, message=FALSE, error=FALSE}
+```{r,echo=FALSE, message=FALSE, error=FALSE,warning=FALSE}
 daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-26-2020.csv")) %>% 
   rename(Long = "Long_") %>% 
   filter(Country_Region == "US") %>% 
@@ -368,7 +368,7 @@ ggplot(data = us, mapping = aes(x = long, y = lat, group = group)) +
   labs(title = "COVID-19 Confirmed Deaths in the US 3/26")
 ```
 
-```{r,echo=FALSE, message=FALSE, error=FALSE}
+```{r,echo=FALSE, message=FALSE, error=FALSE,warning=FALSE}
 daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/09-26-2020.csv")) %>% 
   rename(Long = "Long_") %>% 
   filter(Country_Region == "US") %>% 
@@ -386,43 +386,48 @@ ggplot(data = us, mapping = aes(x = long, y = lat, group = group)) +
   labs(title = "COVID-19 Confirmed Death in the US 9/26")
 ```
 
-# As seen, there is a sharp increase of deaths in the US. now lets look at Canada 
+# As seen, there is a sharp increase of deaths in the US. now lets look a hot zone such as Texas
 
-```{r,echo=FALSE, message=FALSE, error=FALSE}
-daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-26-2020.csv")) %>% 
+```{r,echo=FALSE, message=FALSE, error=FALSE,warning=FALSE}
+daily_report <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-26-2020.csv")) %>% 
   rename(Long = "Long_") %>% 
-  filter(Country_Region == "Canada") %>% 
-  group_by(Province_State) %>% 
+  filter(Province_State == "Texas") %>% 
+  group_by(Admin2) %>% 
   summarize(Confirmed = sum(Confirmed), Deaths = sum(Deaths)) %>% 
-  mutate(Province_State = tolower(Province_State))
-Canada <- map_data("world")
-state_join <- left_join(Canada, daily_report, by = c("region" = "Province_State"))
-ggplot(data = Canada, mapping = aes(x = long, y = lat, group = group)) + 
+  mutate(Admin2 = tolower(Admin2))
+us <- map_data("state")
+tx_us <- subset(us, region == "texas")
+counties <- map_data("county")
+tx_county <- subset(counties, region == "texas")
+state_join <- left_join(tx_county, daily_report, by = c("subregion" = "Admin2")) 
+ggplot(data = tx_county, mapping = aes(x = long, y = lat, group = group)) + 
   coord_fixed(1.3) + 
-  geom_polygon(data = state_join, aes(fill = Confirmed), color = "black") +
-  scale_fill_gradientn(colours = 
-                         wes_palette("Zissou1", 100, type = "continuous"),
+  geom_polygon(data = state_join, aes(fill = Confirmed), color = "white") +
+    scale_fill_gradientn(colors = brewer.pal(n = 5, name = "BuGn"),
                          trans = "log10") +
-  labs(title = "COVID-19 Confirmed Deaths in the Canada 3/26")
+  labs(title = "COVID-19 Confirmed Deaths in Texas 3/26")
 ```
 
-```{r,echo=FALSE, message=FALSE, error=FALSE}
-daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/09-26-2020.csv")) %>% 
+```{r,echo=FALSE, message=FALSE, error=FALSE,warning=FALSE}
+daily_report <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/09-26-2020.csv")) %>% 
   rename(Long = "Long_") %>% 
-  filter(Country_Region == "Canada") %>% 
-  group_by(Province_State) %>% 
+  filter(Province_State == "Texas") %>% 
+  group_by(Admin2) %>% 
   summarize(Confirmed = sum(Confirmed), Deaths = sum(Deaths)) %>% 
-  mutate(Province_State = tolower(Province_State))
-Canada <- map_data("world")
-state_join <- left_join(Canada, daily_report, by = c("region" = "Province_State"))
-ggplot(data = Canada, mapping = aes(x = long, y = lat, group = group)) + 
+  mutate(Admin2 = tolower(Admin2))
+us <- map_data("state")
+tx_us <- subset(us, region == "texas")
+counties <- map_data("county")
+tx_county <- subset(counties, region == "texas")
+state_join <- left_join(tx_county, daily_report, by = c("subregion" = "Admin2")) 
+ggplot(data = tx_county, mapping = aes(x = long, y = lat, group = group)) + 
   coord_fixed(1.3) + 
-  geom_polygon(data = state_join, aes(fill = Confirmed), color = "black") +
-  scale_fill_gradientn(colours = 
-                         wes_palette("Zissou1", 100, type = "continuous"),
+  geom_polygon(data = state_join, aes(fill = Confirmed), color = "white") +
+    scale_fill_gradientn(colors = brewer.pal(n = 5, name = "BuGn"),
                          trans = "log10") +
-  labs(title = "COVID-19 Confirmed Deaths in the Canada 9/26")
+  labs(title = "COVID-19 Confirmed Deaths in Texas 9/26")
 ```
 
+# As seen, the number of the deaths in high density areas is 100x greater over a 6 month span
 # References
 [@RCoreTeam]
