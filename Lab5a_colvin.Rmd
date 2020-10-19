@@ -165,7 +165,7 @@ data_time <- time_series_long_joined %>%
     group_by(Province_State,Date) %>% 
     summarise_at(c("Confirmed", "Deaths"), sum) %>% 
     filter (Province_State %in% c("Massachusetts","New York","Rhode Island","Vermont", "Conneticut","Maine", "New Hampshire")) 
-p <- ggplot(data_time, aes(x = Date,  y = Confirmed, color = Country_Region)) + 
+p <- ggplot(data_time, aes(x = Date,  y = Confirmed, color = Province_State)) + 
       geom_point() +
       geom_line() +
       ggtitle("Confirmed North East COVID-19 Cases") +
