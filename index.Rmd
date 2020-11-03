@@ -38,6 +38,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 [Lab 9, git, Github and Rstudio project](Lab9_colvin.html)
 
+[Lab 9a, git, Github and Rstudio project](Lab9a_colvin.html)
+
 [Lab 10, git, Github and Rstudio project](Lab10_colvin.html)
 
 # REFERENCES

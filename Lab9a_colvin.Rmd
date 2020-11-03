@@ -46,7 +46,7 @@ for(i in 1:10) {
 
 ```{r}
 x <- c("a", "b", "c", "d")
-for(i in 1:4) {
+for(i in 1:6) {
         ## Print out each element of 'x'
         print(x[i])  
 }
@@ -70,7 +70,7 @@ for(i in 1:4) print(x[i])
 
 # Nested for loops
 ```{r}
-x <- matrix(1:6, 2, 3)
+x <- matrix(1:4, 2, 3)
 for(i in seq_len(nrow(x))) {
         for(j in seq_len(ncol(x))) {
                 print(x[i, j])
@@ -83,7 +83,7 @@ for(i in seq_len(nrow(x))) {
 count <- 0
 while(count < 10) {
         print(count)
-        count <- count + 1
+        count <- count + 3
 }
 ```
 
@@ -91,7 +91,7 @@ while(count < 10) {
 z <- 5
 set.seed(1)
 while(z >= 3 && z <= 10) {
-        coin <- rbinom(1, 1, 0.5)
+        coin <- rbinom(1, 1, 0.75)
         
         if(coin == 1) {  ## random walk
                 z <- z + 1
@@ -103,81 +103,62 @@ print(z)
 ```
 
 ```{r}
-> f <- function() {
-+         ## This is an empty function
-+ }
-> ## Functions have their own class
-> class(f)  
-[1] "function"
-> ## Execute this function
-> f()       
-NULL
+f <- function() {
+        ## This is an empty function
+}
+## Functions have their own class
+class(f)  
 ```
 
 ```{r}
-> f <- function() {
-+         cat("Hello, world!\n")
-+ }
-> f()
-Hello, world!
+f <- function() {
+        cat("Hey, it's me!\n")
+}
+f()
 ```
 
 ```{r}
-> f <- function(num) {
-+         for(i in seq_len(num)) {
-+                 cat("Hello, world!\n")
-+         }
-+ }
-> f(3)
-Hello, world!
-Hello, world!
-Hello, world!
+f <- function(num) {
+        for(i in seq_len(num)) {
+                cat("Hey, it's me!\n")
+        }
+}
+f(5)
 ```
 
 ```{r}
-> f <- function(num) {
-+         hello <- "Hello, world!\n"
-+         for(i in seq_len(num)) {
-+                 cat(hello)
-+         }
-+         chars <- nchar(hello) * num
-+         chars
-+ }
-> meaningoflife <- f(3)
-Hello, world!
-Hello, world!
-Hello, world!
-> print(meaningoflife)
-[1] 42
+f <- function(num) {
+        hello <- "Hi!\n"
+        for(i in seq_len(num)) {
+                cat(hello)
+        }
+        chars <- nchar(hello) * num
+        chars
+}
+meaningoflife <- f(4)
 ```
 
 ```{r}
-> f()
-Error in f(): argument "num" is missing, with no default
+print(meaningoflife)
 ```
 
 ```{r}
-> f <- function(num = 1) {
-+         hello <- "Hello, world!\n"
-+         for(i in seq_len(num)) {
-+                 cat(hello)
-+         }
-+         chars <- nchar(hello) * num
-+         chars
-+ }
-> f()    ## Use default value for 'num'
-Hello, world!
-[1] 14
-> f(2)   ## Use user-specified value
-Hello, world!
-Hello, world!
-[1] 28
+f <- function(num = 2) {
+        hello <- "hi!\n"
+        for(i in seq_len(num)) {
+                cat(hello)
+        }
+        chars <- nchar(hello) * num
+        chars
+}
+f()    ## Use default value for 'num'
 ```
 
 ```{r}
-> f(num = 6)
-Hello, world!
-Hello, world!
-[1] 28
+f(3) 
+```
+
+```{r}
+f(num = 4)
 ```
 
