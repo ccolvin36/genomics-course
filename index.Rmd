@@ -44,5 +44,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 [Lab 11, git, Github and Rstudio project](Lab11_colvin.html)
 
+[Lab 11x, git, Github and Rstudio project](Lab11x_colvin.html)
+
 # REFERENCES
 
