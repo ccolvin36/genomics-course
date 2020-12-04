@@ -1,0 +1,21 @@
+---
+title: "Lab 13"
+author: "Chris Colvin"
+date: "12/4/2020"
+output: 
+  prettydoc::html_pretty:
+    theme: hpstr
+    highlight: github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(prettydoc)
+```
+
+# Link to my Website
+
+https://ccolvin36.github.io/My-Website/
